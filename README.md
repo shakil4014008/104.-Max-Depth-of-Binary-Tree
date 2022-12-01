@@ -39,7 +39,7 @@ recursive solution:
         q = deque([root]) # must use deque 
         level = 0
         while q: 
-            for i in range(len(q)):
+            for i in range(len(q)): # no need to use i, here i is a dummy
                 node = q.popleft() # mus use popleft
                 if node.left: 
                     q.append(node.left)
