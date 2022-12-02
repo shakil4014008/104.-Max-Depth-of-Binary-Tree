@@ -16,7 +16,7 @@ recursive solution:
         ans = 0
         q = [(root, 1)] # assuming root length  = 1
         while q: 
-            node, d  = q.pop(0)  # d is the depth           
+            node, d  = q.pop(0)  # d is the depth ; pop could be O(n)          
            
             ans = max(ans, d)
             
@@ -33,7 +33,7 @@ recursive solution:
         ans = 0
         q = deque([(root, 1)]) # assuming root length  = 1
         while q: 
-            node, d  = q.popleft()  # d is the depth           
+            node, d  = q.popleft()  # d is the depth  ; pop is O(1)        
            
             ans = max(ans, d)
             
