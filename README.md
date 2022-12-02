@@ -8,46 +8,40 @@ recursive solution:
             return 0
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
                         
-====================================with stack DFS: 
+====================================with BFS 
 
-    # stack with tuple with height, while, pop and append if available sub tree and update 
-    
-    def maxDepth(self, root: Optional[TreeNode]) -> int: 
+      def maxDepth(self, root: Optional[TreeNode]) -> int: 
         
-        # DFS with stack
-        if not root: return 0
-        
-        ans = 1
-        stack = [(root, 1)] # assuming root length  = 1
-        while stack: 
-            node, height  = stack.pop()   
+        if not root: return 0         
+        ans = 0
+        q = [(root, 1)] # assuming root length  = 1
+        while q: 
+            node, d  = q.pop(0)  # d is the depth           
+           
+            ans = max(ans, d)
             
-            if node: 
-                ans = max(ans, height)
-                stack.append([node.left, height+1])
-                stack.append([node.right, height+1]) 
-                
+            if node.left:  # must be node not root
+                q.append((node.left, d+1))
+            if node.right: 
+                q.append((node.right, d+1))
         return ans
  
- ========================================with queue BFS
-  # structure: queue, then while, then for to iterate neighbors, count level
-  def maxDepth(self, root: Optional[TreeNode]) -> int: 
+ ========================================with dequeu
+      def maxDepth(self, root: Optional[TreeNode]) -> int: 
         
-        # BFS with queue
-        
-        if not root: return 0
-        q = deque([root]) # must use deque 
-        level = 0
+        if not root: return 0         
+        ans = 0
+        q = deque([(root, 1)]) # assuming root length  = 1
         while q: 
-            for i in range(len(q)): # no need to use i, here i is a dummy
-                node = q.popleft() # mus use popleft
-                if node.left: 
-                    q.append(node.left)
-                if node.right: 
-                    q.append(node.right)
+            node, d  = q.popleft()  # d is the depth           
+           
+            ans = max(ans, d)
             
-            level += 1
-        return level
+            if node.left:  # must be node not root
+                q.append((node.left, d+1))
+            if node.right: 
+                q.append((node.right, d+1))
+        return ans
  
  
 ````
